@@ -1,4 +1,4 @@
-# anticheat
+# ac-l0gic
 
 [![sampctl](https://img.shields.io/badge/sampctl-anticheat-2f2f2f.svg?style=for-the-badge)](https://github.com/l0gicmaster/ac-l0gic)
 
