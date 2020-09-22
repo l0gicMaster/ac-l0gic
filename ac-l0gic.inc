@@ -5,6 +5,7 @@
 
 // Includes
 #include <a_samp>
+#define YSI_NO_HEAP_MALLOC
 #include <YSI_Coding\y_timers>  // Timer creation
 #include <YSI_Data\y_iterate>   // Iterating over arrays
 #include <YSI_Data\y_va>        // Formated text
@@ -44,7 +45,7 @@ hook OnPlayerConnect(playerid){
 // static in front of function, makes them visible only in this file
 
 // Warning counter to avoid false positive results
-static WarningCounter(playerid, cheatid){
+static stock WarningCounter(playerid, cheatid){
     // Avoid false positivies, because cheater will use his cheat in some time range.
     // If current and last warning timespan is more than max_warning_timespan, warnings will be reseted
     new currentTime = gettime();
@@ -62,7 +63,7 @@ static WarningCounter(playerid, cheatid){
 }
 
 // Checks if vehicle model is plane or helicopter
-static bool:IsAircraft(vehicleid){
+static stock bool:IsAircraft(vehicleid){
 	switch(GetVehicleModel(vehicleid)){
         case 460,476,511,512,513,519,520,553,577,592,593,548,425,417,487,488,497,563,447,469: 
             return true;
@@ -71,7 +72,7 @@ static bool:IsAircraft(vehicleid){
 }
 
 // Just for debugging purpose
-static DebugMsg(playerid, color, const fmat[], va_args<>){
+static stock DebugMsg(playerid, color, const fmat[], va_args<>){
 	new str[145];
 	va_format(str, sizeof (str), fmat, va_start<3>);
 	return SendClientMessage(playerid, color, str);
@@ -168,7 +169,7 @@ ptask CheckForAirbreak[1000](playerid) {
 // --- FUNCTION REDEFINES --- //
 
 // SetPlayerPos is redefined, because it's serverside player position changer
-SetPlayerPosEx(playerid, Float:x, Float:y, Float:z){
+stock SetPlayerPosEx(playerid, Float:x, Float:y, Float:z){
     // Resets player warning count, to avoid false positives
     Player[playerid][Warnings] = 0;
     return SetPlayerPos(playerid, x, y, z);
@@ -176,7 +177,7 @@ SetPlayerPosEx(playerid, Float:x, Float:y, Float:z){
 #define SetPlayerPos SetPlayerPosEx
 
 // SetVehiclePos is redefined, because it's serverside vehicle position changer
-SetVehiclePosEx(vehicleid, Float:x, Float:y, Float:z){
+stock SetVehiclePosEx(vehicleid, Float:x, Float:y, Float:z){
     // Finds player who is currently driving this vehicle and resets warnings score
     foreach(new i : Player){
         if(GetPlayerState(i) == PLAYER_STATE_DRIVER && GetPlayerVehicleID(i) == vehicleid){
@@ -188,7 +189,7 @@ SetVehiclePosEx(vehicleid, Float:x, Float:y, Float:z){
 #define SetVehiclePos SetVehiclePosEx
 
 // PutPlayerInVehicle is redefined, because it's serverside player seat switcher
-PutPlayerInVehicleEx(playerid, vehicleid, seatid){
+stock PutPlayerInVehicleEx(playerid, vehicleid, seatid){
     Player[playerid][LastVehicle] = vehicleid;
     return PutPlayerInVehicle(playerid, vehicleid, seatid);
 }
