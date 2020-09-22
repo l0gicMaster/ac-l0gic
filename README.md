@@ -1,6 +1,6 @@
 # ac-l0gic
 
-[![sampctl](https://img.shields.io/badge/sampctl-ac-l0gic-2f2f2f.svg?style=for-the-badge)](https://github.com/l0gicmaster/ac-l0gic)
+[![sampctl](https://img.shields.io/badge/sampctl-acl0gic-2f2f2f.svg?style=for-the-badge)](https://github.com/l0gicmaster/ac-l0gic)
 
 <!--
 Short description of your library, why it's useful, some examples, pictures or
