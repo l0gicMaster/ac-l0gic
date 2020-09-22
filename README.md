@@ -1,6 +1,6 @@
 # anticheat
 
-[![sampctl](https://img.shields.io/badge/sampctl-anticheat-2f2f2f.svg?style=for-the-badge)](https://github.com/l0gicmaster/anticheat)
+[![sampctl](https://img.shields.io/badge/sampctl-anticheat-2f2f2f.svg?style=for-the-badge)](https://github.com/l0gicmaster/ac-l0gic)
 
 <!--
 Short description of your library, why it's useful, some examples, pictures or
