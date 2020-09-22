@@ -31,13 +31,13 @@ Happy Pawning!
 Simply install to your project:
 
 ```bash
-sampctl package install l0gicmaster/anticheat
+sampctl package install l0gicmaster/ac-l0gic
 ```
 
 Include in your code and begin using the library:
 
 ```pawn
-#include <anticheat>
+#include <ac-l0gic>
 ```
 
 ## Usage
