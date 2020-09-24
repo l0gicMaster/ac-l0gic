@@ -20,7 +20,7 @@
 // Cheating types
 #define CHEAT_TYPE_AIRBREAK     0
 #define CHEAT_TYPE_WARP         1
-
+#define CHEAT_TYPE_MONEY        2
 // Callbacks
 forward OnPlayerCheating(playerid, cheatid);
 
@@ -32,13 +32,14 @@ enum ePlayer{
     LastWarningTime,
     // Teleporting between vehicles
     LastVehicle,
-    LastVehicleTime
+    LastVehicleTime,
+    Money
 };
 static Player[MAX_PLAYERS][ePlayer];
-
 // Warnings should be reseted, when player connects
 hook OnPlayerConnect(playerid){
     Player[playerid][Warnings] = 0;
+    Player[playerid][Money] = 0;
     return 1;
 }
 
@@ -96,7 +97,18 @@ ptask CheckForWarp[100](playerid){
     } 
     return 1;
 }
-
+ptask CheckForMoney[100](playerid) {
+    static c_Money;
+    c_Money = GetPlayerMoney(playerid);
+    if(c_Money < Player[playerid][Money]) {
+        return 0;
+    }
+    if(c_Money > Player[playerid][Money]) {
+        ResetPlayerMoney(playerid);
+        GivePlayerMoney(playerid, Player[playerid][Money])
+        OnPlayerCheating(playerid, CHEAT_TYPE_MONEY);
+    }
+}
 // Checks players for using speed or teleport hacks
 ptask CheckForAirbreak[1000](playerid) {
     new playerState = GetPlayerState(playerid);
